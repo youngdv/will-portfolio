@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Services — Will Robinson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Monthly short-form video content for local businesses by Will Robinson."
+    />
+    <link rel="icon" type="image/png" href="imgs/willlogo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --brand: #d35400;
+        --bg: #fff;
+        --text: #000;
+        --muted: #505050;
+        --line: #eee;
+
+        /* Services accents */
+        --soft: rgba(211, 84, 0, 0.08);
+        --brand-line: rgba(211, 84, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      main {
+        max-width: 1280px;
+        margin: auto;
+        padding: 24px 32px 56px;
+      }
+
+      /* ===== Header (match your Work page) ===== */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        transition: box-shadow 0.2s ease;
+      }
+      header.scrolled {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--brand);
+        line-height: 1;
+      }
+
+      nav.links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      nav.links a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      nav.links a:hover {
+        opacity: 0.85;
+      }
+
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: 0;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+        color: #000;
+      }
+
+      /* ===== Services Page ===== */
+      h1 {
+        font-size: clamp(34px, 5vw, 46px);
+        line-height: 1.15;
+        margin: 14px 0 10px;
+      }
+
+      p.lead {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 18px;
+        max-width: 72ch;
+      }
+
+      /* Primary monthly highlight */
+      .primary {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px 18px 16px;
+        background: linear-gradient(0deg, var(--soft), transparent 70%);
+        margin: 18px 0 22px;
+        max-width: 980px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: var(--brand);
+        margin-bottom: 10px;
+      }
+
+      .primary h2 {
+        margin: 0 0 8px;
+        font-size: 22px;
+        line-height: 1.25;
+      }
+
+      .primary p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        max-width: 72ch;
+      }
+
+      .primary-points {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .how-it-works {
+        margin: 16px 0 22px;
+        max-width: 72ch;
+      }
+
+      .how-it-works h2 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .steps li {
+        font-size: 18px;
+        margin-bottom: 8px;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .steps li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--brand);
+      }
+
+      /* Services grid (like your screenshot layout) */
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 980px;
+        margin-top: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px;
+        background: #fff;
+      }
+
+      .card.featured {
+        border-color: var(--brand-line);
+        background: rgba(211, 84, 0, 0.04);
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: 42ch;
+      }
+
+      /* NEW: What sets me apart */
+      .divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 28px 0 18px;
+        max-width: 980px;
+      }
+
+      .aside-title {
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 12px;
+        max-width: 980px;
+      }
+
+      .apart {
+        max-width: 980px;
+      }
+
+      .apart-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .apart-item {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+        background: #fff;
+      }
+
+      .apart-item h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        line-height: 1.25;
+      }
+
+      .apart-item p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      /* NEW: Simple process + deliverables */
+      .deliverables {
+        max-width: 980px;
+        margin-top: 18px;
+      }
+
+      .two-col {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .mini {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+        background: #fff;
+      }
+
+      .mini h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .mini ul {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+      }
+
+      .cta {
+        margin-top: 22px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1px solid var(--brand);
+        color: var(--brand);
+        background: transparent;
+      }
+
+      .btn.primary {
+        background: var(--brand);
+        color: #fff;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 18px;
+        text-align: center;
+        color: #888;
+        font-size: 13px;
+        margin-top: 40px;
+      }
+
+      /* ===== Mobile header dropdown (match Work page behavior) ===== */
+      @media (max-width: 700px) {
+        .logo {
+          font-size: 20px;
+          padding-left: 12px;
+        }
+
+        .menu-toggle {
+          display: inline-block;
+        }
+
+        nav.links {
+          display: none;
+          position: absolute;
+          left: 32px;
+          right: 32px;
+          top: 64px;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+          padding: 12px;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        nav.links.show {
+          display: flex;
+        }
+
+        main {
+          padding: 20px 18px 52px;
+        }
+
+        .container {
+          padding: 0 18px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .apart-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 980px) and (min-width: 701px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .apart-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header id="siteHeader">
+      <div class="container nav-wrap">
+        <div class="logo">Will Robinson</div>
+
+        <button
+          class="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <nav class="links" id="mainNav">
+          <a class="only-desktop" href="index.html">Work</a>
+          <a class="only-desktop" href="services.html">Services</a>
+          <a
+            class="only-desktop"
+            href="mailto:wrobinson922@gmail.com?subject=Portfolio%20Inquiry"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Services Content -->
+    <main>
+      <h1>Services</h1>
+      <p class="lead">
+        Monthly short-form video content for local businesses, so you can stay
+        consistent and keep your brand growing.
+      </p>
+
+      <section class="primary" aria-label="Monthly social media content">
+        <div class="badge">Primary Service · Monthly Social Content</div>
+        <h2>Monthly Social Media Video Content</h2>
+        <p>
+          Ongoing short-form content that keeps your business active and
+          consistent online.
+        </p>
+        <ul class="primary-points">
+          <li>Consistent content output for your page</li>
+          <li>Batch filming + editing so you’re set for the month</li>
+        </ul>
+      </section>
+
+      <section class="how-it-works">
+        <h2>How It Works</h2>
+        <ul class="steps">
+          <li>One on-location filming session</li>
+          <li>4–12 short-form videos edited for digital use</li>
+          <li>Posting handled for you (optional)</li>
+          <li>Monthly options available</li>
+        </ul>
+      </section>
+
+      <section class="grid" aria-label="Service types">
+        <div class="card featured">
+          <h3>Monthly Social Ads & Reels</h3>
+          <p>
+            Ongoing short-form content built for consistent posting and growth.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Brand & Event Recaps</h3>
+          <p>Clean, energetic highlights that capture the moment.</p>
+        </div>
+
+        <div class="card">
+          <h3>Narrative Commercials</h3>
+          <p>Story-driven content with interviews and cinematic pacing.</p>
+        </div>
+
+        <div class="card">
+          <h3>Product & Lifestyle</h3>
+          <p>Stylized visuals for menus, launches, and features.</p>
+        </div>
+
+        <div class="card">
+          <h3>Editing & Post</h3>
+          <p>Cutdowns, captions, color, and final delivery.</p>
+        </div>
+
+        <div class="card">
+          <h3>On-Site Production</h3>
+          <p>Solo or small-crew shoots, planned or run-and-gun.</p>
+        </div>
+      </section>
+
+      <!-- NEW: What sets me apart -->
+      <hr class="divider" />
+
+      <p class="aside-title">What sets me apart</p>
+
+      <section class="apart" aria-label="What sets me apart">
+        <div class="apart-grid">
+          <div class="apart-item">
+            <h3>Professional Production Standards</h3>
+            <p>
+              I work with professional-grade camera, audio, and lighting so your
+              content looks clean, polished, and reliable.
+            </p>
+          </div>
+
+          <div class="apart-item">
+            <h3>End-to-End Execution</h3>
+            <p>
+              From planning and shooting through final edit, I manage the full
+              process so projects stay efficient and consistent.
+            </p>
+          </div>
+
+          <div class="apart-item">
+            <h3>Business-Focused Deliverables</h3>
+            <p>
+              Every video is built to support your goals: visibility,
+              engagement, and clear brand messaging.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: Deliverables + workflow (hiring manager friendly) -->
+      <section class="deliverables" aria-label="Deliverables and workflow">
+        <div class="two-col">
+          <div class="mini">
+            <h3>What you get</h3>
+            <ul>
+              <li>Final videos formatted for digital use</li>
+              <li>Captions and cutdowns available</li>
+              <li>Organized delivery via folder link</li>
+            </ul>
+          </div>
+
+          <div class="mini">
+            <h3>Workflow</h3>
+            <ul>
+              <li>Quick kickoff: goals, style, deliverables</li>
+              <li>On-location shoot</li>
+              <li>Edit + review</li>
+              <li>Final delivery</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta">
+        <a
+          class="btn primary"
+          href="mailto:wrobinson922@gmail.com?subject=Monthly%20Social%20Content%20Inquiry"
+          >Book a shoot</a
+        >
+        <a class="btn" href="index.html">View work</a>
+      </div>
+    </main>
+
+    <footer>© 2025 Will Robinson</footer>
+
+    <script>
+      (function () {
+        const header = document.getElementById("siteHeader");
+        const btn = document.querySelector(".menu-toggle");
+        const nav = document.getElementById("mainNav");
+
+        const onScroll = () =>
+          header.classList.toggle("scrolled", window.scrollY > 8);
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        if (btn) {
+          btn.addEventListener("click", () => {
+            const open = nav.classList.toggle("show");
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+
+        // close menu on link click
+        if (nav && btn) {
+          nav.addEventListener("click", (e) => {
+            const target = e.target.closest("a");
+            if (!target) return;
+            nav.classList.remove("show");
+            btn.setAttribute("aria-expanded", "false");
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

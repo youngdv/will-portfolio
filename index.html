@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will Robinson — Video Portfolio</title>
+    <link rel="icon" type="image/png" href="imgs/willlogo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand: #d35400;
+        --bg: #fff;
+        --text: #000;
+        --muted: #505050;
+        --line: #eee;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+      main {
+        max-width: 1280px;
+        margin: auto;
+        padding: 24px 32px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        transition: box-shadow 0.2s ease;
+      }
+      header.scrolled {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 0;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--brand);
+        line-height: 1;
+      }
+      nav.links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      nav.links a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      nav.links a:hover {
+        opacity: 0.85;
+      }
+
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: 0;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+        color: #000;
+      }
+
+      .hero {
+        padding: 10px 0 6px;
+      }
+      .hero p {
+        margin: 0;
+        max-width: 860px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .mini-nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 14px 0 6px;
+      }
+      .mini-nav a {
+        text-decoration: none;
+        color: var(--brand);
+        font-weight: 800;
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        border-radius: 999px;
+      }
+
+      .section {
+        margin: 34px 0 18px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .section h2 {
+        margin: 0;
+        font-size: clamp(20px, 3.5vw, 28px);
+        line-height: 1.2;
+      }
+      .section small {
+        color: var(--muted);
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .h-row {
+        position: relative;
+      }
+      .h-scroll {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(320px, 440px);
+        gap: 24px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        padding: 2px 2px 14px;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 2px;
+        scroll-behavior: smooth;
+      }
+      .h-scroll::-webkit-scrollbar {
+        height: 0px;
+      }
+      .h-scroll {
+        scrollbar-width: none;
+      }
+
+      .card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--line);
+        transition: transform 0.15s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        scroll-snap-align: start;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        border-color: #e4e4e4;
+      }
+
+      .thumb-wrap {
+        position: relative;
+        background: #000;
+      }
+      .thumb {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        display: block;
+      }
+      .year-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 12px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: #111;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--line);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      .caption {
+        padding: 14px 16px 16px;
+      }
+      .title {
+        margin: 0 0 8px;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 1.3;
+        color: #111;
+      }
+      .desc {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+        line-height: 1.45;
+      }
+
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        z-index: 10;
+        user-select: none;
+        transition: transform 0.15s ease, opacity 0.15s ease, filter 0.15s ease;
+      }
+      .scroll-btn:hover {
+        filter: brightness(1.03);
+      }
+      .scroll-btn:active {
+        transform: translateY(-50%) scale(0.98);
+      }
+      .scroll-btn[disabled] {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .scroll-btn.left {
+        left: -18px;
+      }
+      .scroll-btn.right {
+        right: -18px;
+      }
+      .scroll-btn span {
+        font-size: 22px;
+        line-height: 1;
+        color: #111;
+      }
+
+      .fade-left,
+      .fade-right {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 48px;
+        z-index: 5;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      .fade-left {
+        left: 0;
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0)
+        );
+      }
+      .fade-right {
+        right: 0;
+        background: linear-gradient(
+          to left,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0)
+        );
+      }
+      .h-row.can-scroll-left .fade-left {
+        opacity: 1;
+      }
+      .h-row.can-scroll-right .fade-right {
+        opacity: 1;
+      }
+
+      .services-strip {
+        margin: 22px 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 16px;
+        background: #fff;
+      }
+      .services-strip strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
+      .services-strip p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 14px;
+      }
+      .services-strip a {
+        color: var(--brand);
+        font-weight: 800;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(211, 84, 0, 0.25);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 18px;
+        text-align: center;
+        color: #888;
+        font-size: 13px;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 700px) {
+        .logo {
+          font-size: 20px;
+          padding-left: 12px;
+        }
+        .menu-toggle {
+          display: inline-block;
+        }
+        nav.links {
+          display: none;
+          position: absolute;
+          left: 32px;
+          right: 32px;
+          top: 64px;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+          padding: 12px;
+          flex-direction: column;
+          gap: 16px;
+        }
+        nav.links.show {
+          display: flex;
+        }
+        .hero p {
+          font-size: 15.5px;
+        }
+        .h-scroll {
+          grid-auto-columns: minmax(260px, 82vw);
+        }
+        .scroll-btn {
+          display: none;
+        }
+        .fade-left,
+        .fade-right {
+          display: none;
+        }
+      }
+
+      @media (min-width: 701px) {
+        .only-desktop {
+          display: inline-flex;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        header,
+        .btn {
+          transition: none;
+        }
+        .h-scroll {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="siteHeader">
+      <div class="container nav-wrap">
+        <div class="logo">Will Robinson</div>
+
+        <button
+          class="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <nav class="links" id="mainNav">
+          <a class="only-desktop" href="index.html">Work</a>
+          <a class="only-desktop" href="services.html">Services</a>
+          <a
+            class="only-desktop"
+            href="mailto:wrobinson922@gmail.com?subject=Portfolio%20Inquiry"
+          >
+            Contact
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <p>
+          I help businesses stay consistent with social-first video and reels,
+          and I partner with production teams on commercial, event, and
+          documentary work. Clean visuals, strong pacing, and story-led edits
+          built for social and web.
+        </p>
+
+        <div class="mini-nav">
+          <a href="#socialContent">Social for Businesses</a>
+          <a href="#productionWork">Brand and Commercial</a>
+          <a href="#events">Events</a>
+          <a href="#creative">Creative</a>
+        </div>
+
+        <!--  <div class="services-strip">
+          <strong>Most requested</strong>
+          <p>
+            Monthly short-form packages for businesses, plus one-off brand films
+            and event recaps.
+            <a href="services.html">See services</a>
+          </p>
+        </div> -->
+      </section>
+
+      <!-- SOCIAL: all 2025 -->
+      <div class="section" id="socialContent">
+        <h2>Social Content for Businesses</h2>
+        <small>Consistent reels and promos</small>
+      </div>
+
+      <div class="h-row" data-scroll-row>
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+        <button class="scroll-btn left" aria-label="Scroll left">
+          <span>‹</span>
+        </button>
+        <button class="scroll-btn right" aria-label="Scroll right">
+          <span>›</span>
+        </button>
+
+        <section class="h-scroll" aria-label="Social Content for Businesses">
+          <a class="card" href="YangProduct.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/Yangquickadthumb.png"
+                alt="Reel for Yang Market Grocery Store"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Reel for Yang Market Grocery Store</h3>
+              <p class="desc">
+                Social-first promos designed for quick engagement and repeat
+                visits
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="arcteryx.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/arcteryx-thumbnail.png"
+                alt="Arc’teryx Community Social Recap"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Arc’teryx Community Social Recap</h3>
+              <p class="desc">
+                Fast-paced recap built for social sharing and community energy
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="arcteryxwalk.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/shoes.png"
+                alt="A Mile In My Shoes"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">A Mile In My Shoes</h3>
+              <p class="desc">
+                Social-first community story focused on wellness and movement
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="filipino-tastemakers.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/filipino-tastemakers-thumb.png"
+                alt="Event Social Coverage"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Event Social Coverage</h3>
+              <p class="desc">
+                Highlights and reels from live events with a clean, cinematic
+                feel
+              </p>
+            </div>
+          </a>
+        </section>
+      </div>
+
+      <!-- BRAND/COMMERCIAL: 2025 -->
+      <div class="section" id="productionWork">
+        <h2>Brand and Commercial Work</h2>
+        <small>Brands, agencies, production teams</small>
+      </div>
+
+      <div class="h-row" data-scroll-row>
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+        <button class="scroll-btn left" aria-label="Scroll left">
+          <span>‹</span>
+        </button>
+        <button class="scroll-btn right" aria-label="Scroll right">
+          <span>›</span>
+        </button>
+
+        <section class="h-scroll" aria-label="Brand and Commercial Work">
+          <a class="card" href="Yang.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/yangthumbnail.png"
+                alt="Yang Market Commercial"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Yang Market Commercial</h3>
+              <p class="desc">
+                Narrative brand spot with owner interview and cinematic coverage
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="d17-microdoc.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/d17-thumb.jpg"
+                alt="D17 RLRT Micro Doc"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">D17 RLRT Micro Doc</h3>
+              <p class="desc">
+                Short documentary built around brand, people, and place
+              </p>
+            </div>
+          </a>
+        </section>
+      </div>
+
+      <!-- EVENTS: 2025 first, then 2024, then 2022 -->
+      <div class="section" id="events">
+        <h2>Events and Milestone Coverage</h2>
+        <small>Live coverage and key moments</small>
+      </div>
+
+      <div class="h-row" data-scroll-row>
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+        <button class="scroll-btn left" aria-label="Scroll left">
+          <span>‹</span>
+        </button>
+        <button class="scroll-btn right" aria-label="Scroll right">
+          <span>›</span>
+        </button>
+
+        <section class="h-scroll" aria-label="Events and Milestone Coverage">
+          <a class="card" href="wedding1.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/wedding-thumb.png"
+                alt="Wedding Film"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Wedding Film</h3>
+              <p class="desc">Cinematic coverage focused on emotion and pace</p>
+            </div>
+          </a>
+
+          <a class="card" href="fhwa.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/fhwapete.png"
+                alt="FHWA Ribbon Cutting"
+              />
+              <span class="year-tag">2024</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">FHWA Ribbon Cutting</h3>
+              <p class="desc">
+                High-visibility coverage built for public audiences and internal
+                comms
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="fhwa2.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/PublicRoads.png"
+                alt="Public Roads Feature"
+              />
+              <span class="year-tag">2024</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Public Roads Feature</h3>
+              <p class="desc">Magazine-style story produced for FHWA</p>
+            </div>
+          </a>
+
+          <a class="card" href="BioBuzz.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/Biobuzzthumbnail.png"
+                alt="Bio Buzz Award Ceremony"
+              />
+              <span class="year-tag">2022</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Bio Buzz Award Ceremony</h3>
+              <p class="desc">
+                Awards coverage capturing key moments, speakers, and atmosphere
+              </p>
+            </div>
+          </a>
+        </section>
+      </div>
+
+      <!-- CREATIVE: 2025 first, then 2024 -->
+      <div class="section" id="creative">
+        <h2>Creative Work</h2>
+        <small>Film and music</small>
+      </div>
+
+      <div class="h-row" data-scroll-row>
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+        <button class="scroll-btn left" aria-label="Scroll left">
+          <span>‹</span>
+        </button>
+        <button class="scroll-btn right" aria-label="Scroll right">
+          <span>›</span>
+        </button>
+
+        <section class="h-scroll" aria-label="Creative Work">
+          <a class="card" href="7round.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/musicvideo7.png"
+                alt="7round Music Video"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">7round Music Video</h3>
+              <p class="desc">
+                Performance-driven visuals with tight rhythmic edits
+              </p>
+            </div>
+          </a>
+
+          <a class="card" href="StoppedforCoffee.html">
+            <div class="thumb-wrap">
+              <img
+                class="thumb"
+                src="imgs/stoppedforcoffee.png"
+                alt="Stopped For Coffee short film"
+              />
+              <span class="year-tag">2025</span>
+            </div>
+            <div class="caption">
+              <h3 class="title">Stopped For Coffee</h3>
+              <p class="desc">Short Narrative Film</p>
+            </div>
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <footer>© 2025 Will Robinson</footer>
+
+    <script>
+      (function () {
+        const header = document.getElementById("siteHeader");
+        const btn = document.querySelector(".menu-toggle");
+        const nav = document.getElementById("mainNav");
+
+        const onScroll = () => {
+          header.classList.toggle("scrolled", window.scrollY > 8);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        if (btn) {
+          btn.addEventListener("click", () => {
+            const open = nav.classList.toggle("show");
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+
+        nav.addEventListener("click", (e) => {
+          const target = e.target.closest("a");
+          if (!target) return;
+          nav.classList.remove("show");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+
+        const rows = document.querySelectorAll("[data-scroll-row]");
+        const updateRowState = (row) => {
+          const scroller = row.querySelector(".h-scroll");
+          const leftBtn = row.querySelector(".scroll-btn.left");
+          const rightBtn = row.querySelector(".scroll-btn.right");
+          if (!scroller || !leftBtn || !rightBtn) return;
+
+          const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+          const canLeft = scroller.scrollLeft > 2;
+          const canRight = scroller.scrollLeft < maxScrollLeft - 2;
+
+          leftBtn.disabled = !canLeft;
+          rightBtn.disabled = !canRight;
+
+          row.classList.toggle("can-scroll-left", canLeft);
+          row.classList.toggle("can-scroll-right", canRight);
+
+          const hasOverflow = scroller.scrollWidth > scroller.clientWidth + 4;
+          leftBtn.style.display = hasOverflow ? "" : "none";
+          rightBtn.style.display = hasOverflow ? "" : "none";
+        };
+
+        rows.forEach((row) => {
+          const scroller = row.querySelector(".h-scroll");
+          const leftBtn = row.querySelector(".scroll-btn.left");
+          const rightBtn = row.querySelector(".scroll-btn.right");
+          if (!scroller || !leftBtn || !rightBtn) return;
+
+          const scrollByAmount = () => Math.round(scroller.clientWidth * 0.85);
+
+          leftBtn.addEventListener("click", () => {
+            scroller.scrollBy({ left: -scrollByAmount(), behavior: "smooth" });
+          });
+
+          rightBtn.addEventListener("click", () => {
+            scroller.scrollBy({ left: scrollByAmount(), behavior: "smooth" });
+          });
+
+          scroller.addEventListener("scroll", () => updateRowState(row), {
+            passive: true,
+          });
+
+          window.addEventListener("resize", () => updateRowState(row), {
+            passive: true,
+          });
+
+          updateRowState(row);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filipino Tastemaker Event Recap — Will Robinson Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Filipino Tastemaker Event recap produced for The Hall on H Street. Produced, shot, and edited by Will Robinson."
+    />
+    <link rel="icon" type="image/png" href="imgs/willlogo.png" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <style>
+      :root {
+        --brand: #d35400;
+        --text: #000;
+        --bg: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Inter, system-ui, sans-serif;
+        line-height: 1.6;
+      }
+
+      /* Back link outside content margin */
+      .back-outside {
+        position: fixed;
+        top: 32px;
+        left: 24px;
+        font-weight: 700;
+        color: var(--brand);
+        text-decoration: none;
+        white-space: nowrap;
+        z-index: 10;
+      }
+
+      .page {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 32px 5%;
+        position: relative;
+      }
+
+      header.site {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--brand);
+        margin-bottom: 22px;
+        letter-spacing: 0.2px;
+        text-align: left;
+      }
+
+      h1 {
+        font-size: clamp(26px, 4.5vw, 36px);
+        line-height: 1.2;
+        margin: 6px 0 12px;
+      }
+
+      p.lead {
+        font-size: 18px;
+        margin: 0 0 14px;
+        max-width: 72ch;
+      }
+
+      p.meta {
+        margin: 0 0 18px;
+        font-size: 16px;
+      }
+
+      /* Match Yang sizing and centering */
+      .video-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0 6px;
+      }
+
+      .video-frame {
+        width: 32%;
+        max-width: 320px;
+      }
+
+      .video-frame .vimeo-embed {
+        position: relative;
+        padding: 177.78% 0 0 0;
+      }
+
+      .video-frame .vimeo-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      @media (max-width: 900px) {
+        .back-outside {
+          left: 16px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          padding: 22px 5%;
+        }
+
+        .video-frame {
+          width: 100%;
+        }
+
+        .back-outside {
+          top: 18px;
+          left: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="index.html" class="back-outside" aria-label="Back to portfolio">
+      ← Back
+    </a>
+
+    <div class="page">
+      <header class="site">Will Robinson Portfolio</header>
+
+      <h1>Filipino Tastemaker Event Recap</h1>
+
+      <p class="lead">
+        Filipino Tastemaker Event recap produced for The Hall on H Street.
+      </p>
+
+      <p class="meta"><strong>Role:</strong> Producer, Shooter, Editor</p>
+
+      <div class="video-wrapper">
+        <div class="video-frame">
+          <div class="vimeo-embed">
+            <iframe
+              src="https://player.vimeo.com/video/1206505244?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Filipino Tastemaker Event recap produced for The Hall on H Street."
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+  </body>
+</html>
